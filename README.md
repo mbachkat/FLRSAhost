@@ -1,6 +1,6 @@
 # FLRSAhost
 
-**FLRSAhost** is the open-source host-side implementation for the **FLRSA** (Fast/Flexible Lightweight RSA) project. This repository contains the middleware and client-side logic designed to interact with the [FLRSAonSmartCard](https://github.com/mbachkat/FLRSAonSmartCard) applet.
+**FLRSAhost** is the open-source host-side implementation for the **FLRSA** (Fast and Lightweight RSA) project. This repository contains the middleware and client-side logic designed to interact with the [FLRSAonSmartCard](https://github.com/mbachkat/FLRSAonSmartCard) applet.
 
 ---
 
