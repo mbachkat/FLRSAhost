@@ -12,7 +12,6 @@ The architecture follows a classic Client-Server model via the **APDU (Applicati
 
 1. **Orchestration**: The host application (this repo) manages the session lifecycle, detects the smart card reader, and selects the applet (AID: `4A434D6174684C6962`).
 2. **Offloading**: Complex mathematical operations (Modular Exponentiation, CRT) are triggered by the host but executed within the card's Secure Element. This ensures that sensitive private keys never leave the hardware.
-3. **Benchmarking**: FLRSAhost includes specific tasks to measure and analyze the performance of the FLRSA algorithm directly on the chip.
 
 
 
