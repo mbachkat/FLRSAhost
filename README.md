@@ -30,7 +30,6 @@ Open a terminal in your GlobalPlatform directory and run the following commands 
 
 > **Note:** Ensure your card reader is connected and the card is inserted. Adjust the `-key` parameter if your card uses non-default transport keys.
 
-```bash
 # Delete existing instance/package if already present
 java -jar gp.jar -key default -delete 4A434D6174684C6962 -f
 
