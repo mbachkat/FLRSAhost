@@ -51,4 +51,4 @@ gradle RunInit
 
 #### 2. Calculation
 Executes the optimized RSA calculation logic:
-gradle RunCalcl
+gradle RunCalc
