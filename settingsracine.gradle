@@ -1,0 +1,9 @@
+// Fichier : settings.gradle
+
+rootProject.name = 'JCMathLib'
+
+// Déclare le sous-projet 'host'
+include 'host' 
+
+// Si vous avez un module pour l'applet (la carte)
+// include 'applet'

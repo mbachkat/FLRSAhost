@@ -1,0 +1,92 @@
+// --- build.gradle (RACINE) ---
+
+plugins {
+    id 'java'
+    id 'application'
+    // NOUVELLE LIGNE : Ajout du plugin pour créer le JAR exécutable complet
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+    id 'edu.sc.seis.launch4j' version '3.0.7'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://javacard.pro/maven"
+    }
+}
+
+application {
+    // NE PAS mettre InitHost ici — cela concerne le module "host"
+    mainClass = ''
+}
+
+// On déclare que le module 'host' gère son propre classpath
+project(':host') {
+    apply plugin: 'java'
+    apply plugin: 'application'
+   
+   
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+        // NOUVELLE LIGNE : Appliquer le plugin shadow au module host
+    apply plugin: 'com.github.johnrengelman.shadow'
+    }
+
+
+
+    dependencies {
+         implementation files('libs/gp.jar')
+        // Version apdu4j qui contient BIBO   // gp.jar dans host/libs
+        
+    }
+
+    application {
+        mainClass = 'opencrypto.jcmathlib.CalculateHost'
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src/main']
+            }
+        }
+
+    // DANS project(':host') { ... }
+
+// Supprimez le bloc tasks.register('createExe', ...) existant.
+// Configurez la tâche 'createExe' existante, créée automatiquement par le plugin.
+// Dans project(':host') { ... }
+
+// Configurez la tâche 'createExe' existante, créée automatiquement par le plugin.
+// DANS project(':host') { ... }
+
+// DANS project(':host') { ... }
+
+// DANS project(':host') { ... }
+
+
+
+    }
+    shadowJar {
+        // Définit le nom du fichier JAR généré
+        archiveFileName = "jcmathlib-calc-host.jar"
+        
+        // Définit la classe principale à exécuter
+        manifest {
+            attributes 'Main-Class': 'opencrypto.jcmathlib.CalculateHost'
+        }
+    }
+
+  
+
+    tasks.register('runCalc', JavaExec) {
+        description = "Exécute CalculateHost"
+        group = "verification"
+        mainClass = 'opencrypto.jcmathlib.CalculateHost'
+        classpath = sourceSets.main.runtimeClasspath
+        dependsOn classes
+    }
+}

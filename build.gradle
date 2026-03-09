@@ -1,0 +1,64 @@
+// --- build.gradle (RACINE) ---
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://javacard.pro/maven"
+    }
+}
+
+application {
+    // NE PAS mettre InitHost ici — cela concerne le module "host"
+    mainClass = ''
+}
+
+// On déclare que le module 'host' gère son propre classpath
+project(':host') {
+    apply plugin: 'java'
+    apply plugin: 'application'
+
+    repositories {
+        mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
+    dependencies {
+         implementation files('libs/gp.jar')
+        // Version apdu4j qui contient BIBO   // gp.jar dans host/libs
+    }
+
+    application {
+        mainClass = 'opencrypto.jcmathlib.InitHost'
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src/main']
+            }
+        }
+    }
+
+    tasks.register('runInit', JavaExec) {
+        description = "Exécute InitHost"
+        group = "verification"
+        mainClass = 'opencrypto.jcmathlib.InitHost'
+        classpath = sourceSets.main.runtimeClasspath
+        dependsOn classes
+    }
+
+    tasks.register('runCalc', JavaExec) {
+        description = "Exécute CalculateHost"
+        group = "verification"
+        mainClass = 'opencrypto.jcmathlib.CalculateHost'
+        classpath = sourceSets.main.runtimeClasspath
+        dependsOn classes
+    }
+}
